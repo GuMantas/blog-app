@@ -1,20 +1,20 @@
 import * as moment from 'moment';
 
 export interface Options {
-  userId: string;
-  userName: string;
-  id: string;
+  userId?: string;
+  userName?: string;
+  id?: string;
   title: string;
   body: string;
+  date?: string;
 }
-
 export default class Question {
   private _userId: string;
   private _userName: string;
   private _id: string;
   private _title: string;
   private _body: string;
-  private _date: moment.Moment;
+  private _date: string;
   private _isExpanded: boolean = false;
 
   constructor(options: Options) {
@@ -23,7 +23,31 @@ export default class Question {
     this._id = options.id;
     this._title = options.title;
     this._body = options.body;
-    this._date = moment().subtract(1, 'hours');
+    this._date = options.date || moment().format('YYYY-MM-DD HH:mm:ss');
+  }
+
+  get getTitle() {
+    return this._title;
+  }
+
+  get getBody() {
+    return this._body;
+  }
+
+  get getDate() {
+    return this._date;
+  }
+
+  get getUserName() {
+    return this._userName;
+  }
+
+  get getUserId() {
+    return this._userId;
+  }
+
+  get getId() {
+    return this._id;
   }
 
   private getPeriod() {
@@ -72,6 +96,7 @@ export default class Question {
       body.appendChild(span);
       return body;
     } else {
+      body.innerText = this._body;
       return body;
     }
   }

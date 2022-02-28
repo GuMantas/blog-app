@@ -1,32 +1,37 @@
-import { AxiosResponse } from "axios";
-import { User } from "src/scripts/classes";
-import  Crud  from "../scripts/classes/Crud.class";
+import { AxiosResponse } from 'axios';
+import Crud from '../classes/Crud.class';
+import { Options } from '../classes/User.class'
 
 class UserService extends Crud {
-    private url: string = 'https://jsonplaceholder.typicode.com'
+  private _url: string = 'https://blog-appa-default-rtdb.firebaseio.com/users.json';
 
-    private _paths = {
-        users: '/users'
-    }
+  // private _paths = {
+  //   users: '/users'
+  // }
 
-    getUsersById(id:string): Promise<AxiosResponse> {
-        return this.get(`${this.url}${this._paths.users}`)
-    }
-    getUsers(): Promise<AxiosResponse> {
-        return this.get(`${this.url}${this._paths.users}`)
-    }
-    createUsers(data:any): Promise<AxiosResponse>{
-        return this.post(`${this.url}${this._paths.users}`, data)
-    }
-    patchUsers(id:string, data: any): Promise<AxiosResponse> {
-        return this.patch(`${this.url}${this._paths.users}/${id}`, data)
-    }
-    putUsers(id:string, data:any): Promise<AxiosResponse> {
-        return this.put(`${this.url}${this._paths.users}/${id}`, data)
-    }
-    deleteUsers(id:string, data: any): Promise<AxiosResponse> {
-        return this.delete(`${this.url}${this._paths.users}/${id}`, data)
-    }
+  getUsers(): Promise<AxiosResponse> {
+    return this.get(`${this._url}`);
+  }
+
+  // getUserById(id: string): Promise<AxiosResponse> {
+  //   return this.get(`${this._url}${this._paths.users}/${id}`);
+  // }
+
+  // createUser(data: Options): Promise<AxiosResponse> {
+  //   return this.post(`${this._url}${this._paths.users}`, data);
+  // }
+
+  // patchUser(id: string, data: Options): Promise<AxiosResponse> {
+  //   return this.patch(`${this._url}${this._paths.users}/${id}`, data);
+  // }
+
+  // putUser(id: string, data: Options): Promise<AxiosResponse> {
+  //   return this.put(`${this._url}${this._paths.users}/${id}`, data);
+  // }
+
+  // deleteUser(id: string, data?: Options): Promise<AxiosResponse> {
+  //   return this.delete(`${this._url}${this._paths.users}/${id}`, data);
+  // }
 }
 
 export default new UserService();
